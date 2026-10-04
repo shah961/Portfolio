@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Miss Warda - Happy Teacher's Day ♡</title>
+
+    <!-- Google Fonts import -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FFF5F8;
+            --white: #FFFFFF;
+            --soft-pink: #F8D7E3;
+            --rose-pink: #E89AB2;
+            --deep-rose: #A83F63;
+            --text-color: #542536;
+            --shadow-color: rgba(168, 63, 99, 0.15);
+            --font-heading: 'Great Vibes', cursive;
+            --font-subheading: 'Dancing Script', cursive;
+            --font-body: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px 15px;
+        }
+
+        /* Ambient soft blurred circles */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.6;
+        }
+
+        .bg-circle-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--soft-pink);
+            top: -50px;
+            left: -50px;
+        }
+
+        .bg-circle-2 {
+            width: 350px;
+            height: 350px;
+            background: #FCE4EC;
+            bottom: -80px;
+            right: -50px;
+        }
+
+        /* Container & Layout */
+        .app-container {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section */
+        .hero-header {
+            text-align: center;
+            margin-bottom: 25px;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 6vw, 3.8rem);
+            color: var(--deep-rose);
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-sans);
+            font-size: clamp(0.85rem, 2vw, 1.05rem);
+            font-weight: 300;
+            letter-spacing: 1px;
+            color: var(--text-color);
+            opacity: 0.85;
+        }
+
+        /* Envelope Wrapper */
+        .envelope-container {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 420px;
+            height: 270px;
+            margin: 10px auto 30px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .envelope-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .envelope {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: var(--soft-pink);
+            border-radius: 12px;
+            box-shadow: 0 15px 35px var(--shadow-color);
+            overflow: visible;
+        }
+
+        /* Envelope Flap */
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 210px solid transparent;
+            border-right: 210px solid transparent;
+            border-top: 145px solid var(--rose-pink);
+            transform-origin: top center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.08));
+        }
+
+        /* Envelope Front Pocket */
+        .envelope-pocket {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            z-index: 3;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .envelope-pocket::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 210px solid #F3C4D3;
+            border-bottom: 140px solid #F3C4D3;
+            border-top: 130px solid transparent;
+            border-right: 210px solid transparent;
+        }
+
+        .envelope-pocket::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-right: 210px solid #ECA1B8;
+            border-bottom: 140px solid #ECA1B8;
+            border-top: 130px solid transparent;
+            border-left: 210px solid transparent;
+        }
+
+        /* Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: 125px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 54px;
+            height: 54px;
+            background: linear-gradient(135deg, #A83F63, #7E2643);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            font-size: 22px;
+            box-shadow: 0 4px 10px rgba(84, 37, 54, 0.3);
+            z-index: 6;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+        }
+
+        .action-area {
+            text-align: center;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .open-btn {
+            background: linear-gradient(135deg, var(--rose-pink) 0%, var(--deep-rose) 100%);
+            color: var(--white);
+            border: none;
+            padding: 14px 38px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(168, 63, 99, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            outline: none;
+        }
+
+        .open-btn:hover, .open-btn:focus {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 12px 25px rgba(168, 63, 99, 0.4);
+        }
+
+        .open-btn:active {
+            transform: scale(0.98) translateY(0);
+        }
+
+        /* Letter Container */
+        .letter-card {
+            background: var(--white);
+            width: 100%;
+            border-radius: 16px;
+            padding: 45px 40px;
+            box-shadow: 0 20px 40px var(--shadow-color);
+            position: relative;
+            display: none;
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid var(--soft-pink);
+        }
+
+        .letter-card.visible {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .letter-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            color: var(--deep-rose);
+            margin-bottom: 5px;
+        }
+
+        .letter-divider {
+            color: var(--rose-pink);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            user-select: none;
+        }
+
+        .typewriter-content {
+            font-size: clamp(1.1rem, 2.3vw, 1.3rem);
+            line-height: 1.8;
+            color: var(--text-color);
+            white-space: pre-wrap;
+            min-height: 250px;
+        }
+
+        /* Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: var(--deep-rose);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 0.8s infinite;
+        }
+
+        .cursor.finished {
+            display: none;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Post Typing Footer */
+        .letter-footer {
+            margin-top: 35px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .letter-footer.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-note {
+            font-family: var(--font-subheading);
+            font-size: 1.4rem;
+            color: var(--rose-pink);
+            margin-bottom: 15px;
+        }
+
+        .replay-btn {
+            background: transparent;
+            color: var(--deep-rose);
+            border: 1.5px solid var(--rose-pink);
+            padding: 8px 22px;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .replay-btn:hover {
+            background: var(--soft-pink);
+            border-color: var(--deep-rose);
+        }
+
+        /* Floating Petals / Hearts */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            animation: floatUp linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 480px) {
+            .envelope-container {
+                max-width: 300px;
+                height: 200px;
+            }
+
+            .envelope-flap {
+                border-left-width: 150px;
+                border-right-width: 150px;
+                border-top-width: 105px;
+            }
+
+            .envelope-pocket::before {
+                border-left-width: 150px;
+                border-bottom-width: 100px;
+                border-top-width: 100px;
+                border-right-width: 150px;
+            }
+
+            .envelope-pocket::after {
+                border-right-width: 150px;
+                border-bottom-width: 100px;
+                border-top-width: 100px;
+                border-left-width: 150px;
+            }
+
+            .wax-seal {
+                top: 95px;
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+
+            .letter-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .envelope-flap, .letter-card, .open-btn, .wax-seal, .letter-footer {
+                transition: none !important;
+                animation: none !important;
+            }
+            .cursor {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ambient Background Shapes -->
+    <div class="ambient-bg">
+        <div class="bg-circle bg-circle-1"></div>
+        <div class="bg-circle bg-circle-2"></div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+
+        <!-- Initial Screen / Envelope Area -->
+        <section id="envelope-section">
+            <header class="hero-header" id="hero-header">
+                <h1 class="hero-title">To A Wonderful Teacher</h1>
+                <p class="hero-subtitle">MISS WARDA</p>
+            </header>
+
+            <div class="envelope-container" id="envelope-container" role="button" aria-label="Open Letter to Miss Warda" tabindex="0">
+                <div class="envelope">
+                    <div class="envelope-flap" id="envelope-flap"></div>
+                    <div class="wax-seal" id="wax-seal">♡</div>
+                    <div class="envelope-pocket"></div>
+                </div>
+            </div>
+
+            <div class="action-area" id="action-area">
+                <p style="font-family: var(--font-sans); font-size: 0.9rem; margin-bottom: 15px; opacity: 0.8;">
+                    There's a little something I'd like to say...
+                </p>
+                <button class="open-btn" id="open-btn" aria-label="Open Letter">
+                    Open Letter ♡
+                </button>
+            </div>
+        </section>
+
+        <!-- Letter View Section -->
+        <article class="letter-card" id="letter-card" aria-live="polite">
+            <header class="letter-header">
+                <h2 class="letter-title">Happy Teacher's Day</h2>
+                <div class="letter-divider">♡ ───────── ♡</div>
+            </header>
+
+            <div class="typewriter-content">
+                <span id="typewriter-text"></span><span class="cursor" id="cursor"></span>
+            </div>
+
+            <footer class="letter-footer" id="letter-footer">
+                <p class="footer-note">Made with gratitude ♡</p>
+                <button class="replay-btn" id="replay-btn" aria-label="Read letter again">Read Again</button>
+            </footer>
+        </article>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const openBtn = document.getElementById('open-btn');
+            const envelopeContainer = document.getElementById('envelope-container');
+            const envelopeFlap = document.getElementById('envelope-flap');
+            const waxSeal = document.getElementById('wax-seal');
+            const heroHeader = document.getElementById('hero-header');
+            const actionArea = document.getElementById('action-area');
+            const letterCard = document.getElementById('letter-card');
+            const typewriterText = document.getElementById('typewriter-text');
+            const cursor = document.getElementById('cursor');
+            const letterFooter = document.getElementById('letter-footer');
+            const replayBtn = document.getElementById('replay-btn');
+
+            // Message Content
+            const letterMessage = `Dear Miss Warda,
+
+On this special day, I just want to say thank you.
+
+Thank you for your patience, your guidance, and for always encouraging your students to do better. A great teacher doesn't just teach lessons from a book; they inspire confidence, curiosity, and the courage to keep learning.
+
+Your kindness and dedication make a difference in ways that may not always be expressed, but they are truly appreciated.
+
+I feel genuinely grateful to have learned from you. Thank you for being such a wonderful teacher and for making learning a little brighter every day.
+
+Happy Teacher's Day!
+
+With heartfelt respect and gratitude,
+Your Student ♡`;
+
+            let isTyping = false;
+            let typingTimeout = null;
+            let hasOpened = false;
+
+            // Open Letter Interaction Trigger
+            const openLetter = () => {
+                if (hasOpened) return;
+                hasOpened = true;
+
+                // Disable multiple clicks
+                openBtn.disabled = true;
+                openBtn.style.pointerEvents = 'none';
+
+                // Fade out hero text and button
+                actionArea.style.opacity = '0';
+                actionArea.style.transform = 'translateY(10px)';
+                heroHeader.style.opacity = '0';
+                heroHeader.style.transform = 'translateY(-10px)';
+
+                // Animate wax seal fade
+                waxSeal.style.opacity = '0';
+                waxSeal.style.transform = 'translate(-50%, -50%) scale(0.5)';
+
+                // Open envelope flap
+                setTimeout(() => {
+                    envelopeFlap.style.transform = 'rotateX(180deg)';
+                    envelopeFlap.style.zIndex = '1';
+                }, 300);
+
+                // Spawn celebratory particles
+                setTimeout(() => {
+                    createPetalBurst();
+                }, 600);
+
+                // Transition envelope out and reveal letter card
+                setTimeout(() => {
+                    document.getElementById('envelope-section').style.display = 'none';
+                    letterCard.classList.add('visible');
+                    
+                    // Start Typewriter
+                    startTypewriter(letterMessage);
+                }, 1200);
+            };
+
+            // Event Listeners for Opening
+            openBtn.addEventListener('click', openLetter);
+            envelopeContainer.addEventListener('click', openLetter);
+            envelopeContainer.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openLetter();
+                }
+            });
+
+            // Natural Typewriter Effect
+            function startTypewriter(text) {
+                isTyping = true;
+                typewriterText.textContent = '';
+                cursor.classList.remove('finished');
+                letterFooter.classList.remove('visible');
+
+                let index = 0;
+
+                function typeNextChar() {
+                    if (index < text.length) {
+                        const char = text.charAt(index);
+                        typewriterText.textContent += char;
+                        index++;
+
+                        // Calculate realistic natural typing delay
+                        let delay = Math.floor(Math.random() * 25) + 25; // 25ms - 50ms base
+                        
+                        if (['.', '!', '?'].includes(char)) {
+                            delay += 350; // Pause longer on sentence ends
+                        } else if ([',', ';', '-'].includes(char)) {
+                            delay += 180; // Pause slightly on punctuation
+                        } else if (char === '\n') {
+                            delay += 250; // Pause on line breaks
+                        }
+
+                        typingTimeout = setTimeout(typeNextChar, delay);
+                    } else {
+                        // Typing complete
+                        isTyping = false;
+                        setTimeout(() => {
+                            cursor.classList.add('finished');
+                            letterFooter.classList.add('visible');
+                        }, 500);
+                    }
+                }
+
+                typeNextChar();
+            }
+
+            // Replay Button Functionality
+            replayBtn.addEventListener('click', () => {
+                if (isTyping) clearTimeout(typingTimeout);
+                startTypewriter(letterMessage);
+                createPetalBurst();
+            });
+
+            // Floating Petal/Heart Particles Engine
+            function createPetalBurst() {
+                const colors = ['#E89AB2', '#F8D7E3', '#A83F63', '#FFD1DC'];
+                const symbols = ['♡', '🌸', '✨', '❣'];
+
+                for (let i = 0; i < 18; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        
+                        const isSymbol = Math.random() > 0.4;
+                        if (isSymbol) {
+                            particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                            particle.style.fontSize = `${Math.random() * 12 + 12}px`;
+                            particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                        } else {
+                            particle.style.width = `${Math.random() * 8 + 8}px`;
+                            particle.style.height = `${Math.random() * 8 + 8}px`;
+                            particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                            particle.style.borderRadius = '50% 0 50% 50%';
+                        }
+
+                        particle.style.left = `${Math.random() * 90 + 5}%`;
+                        particle.style.bottom = '-20px';
+                        
+                        const duration = Math.random() * 3 + 4;
+                        particle.style.animationDuration = `${duration}s`;
+
+                        document.body.appendChild(particle);
+
+                        setTimeout(() => {
+                            particle.remove();
+                        }, duration * 1000);
+                    }, i * 120);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
